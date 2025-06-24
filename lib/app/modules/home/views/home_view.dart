@@ -152,6 +152,19 @@ class HomeView extends GetView<HomeController> {
                 )
               )
             ),
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {}, 
+            child: Text("Cek Ongkir", style: TextStyle(fontSize: 16, color: Colors.white)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              padding: EdgeInsets.symmetric(vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              )
+            ),
+
           )
         ],
       ),
