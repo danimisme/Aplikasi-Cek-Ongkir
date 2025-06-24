@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ongkir/app/data/models/city_model.dart';
 import 'package:ongkir/app/data/models/province_model.dart';
+import 'package:ongkir/app/routes/app_pages.dart';
 
 class HomeController extends GetxController {
   TextEditingController beratC = TextEditingController();
@@ -60,8 +61,9 @@ class HomeController extends GetxController {
             "courier": codeKurir.value,
           }
         );
-        var rajaongkir = response.data['rajaongkir']['results'][0]['costs'];
+        var rajaongkir = response.data['rajaongkir'];
         print(rajaongkir);
+        Get.toNamed(Routes.RESULT, arguments: rajaongkir);
       } catch (e) {
         print("Error: $e");
       }
