@@ -25,6 +25,7 @@ class HomeView extends GetView<HomeController> {
             items: (f , s) => controller.fetchProvince(f),
             itemAsString: (item) => item.province ?? '',
             popupProps: PopupProps.menu(
+              fit: FlexFit.loose,
               showSelectedItems: true,
               showSearchBox: true,
               loadingBuilder: (context, searchEntry) => 
@@ -51,6 +52,7 @@ class HomeView extends GetView<HomeController> {
             items: (f , s) => controller.fetchCity(f),
             itemAsString: (item) => item.cityName ?? '',
             popupProps: PopupProps.menu(
+              fit: FlexFit.loose,
               showSelectedItems: true,
               showSearchBox: true,
               loadingBuilder: (context, searchEntry) => 
@@ -77,6 +79,7 @@ class HomeView extends GetView<HomeController> {
             items: (f , s) => controller.fetchProvince(f),
             itemAsString: (item) => item.province ?? '',
             popupProps: PopupProps.menu(
+              fit: FlexFit.loose,
               showSelectedItems: true,
               showSearchBox: true,
               loadingBuilder: (context, searchEntry) => 
@@ -103,6 +106,7 @@ class HomeView extends GetView<HomeController> {
             items: (f , s) => controller.fetchCity(f),
             itemAsString: (item) => item.cityName ?? '',
             popupProps: PopupProps.menu(
+              fit: FlexFit.loose,
               showSelectedItems: true,
               showSearchBox: true,
               loadingBuilder: (context, searchEntry) => 
@@ -133,6 +137,7 @@ class HomeView extends GetView<HomeController> {
             compareFn: (item1, item2) => item1['value'] == item2['value'],
             itemAsString: (item) => item['name'] ?? '',
             popupProps: PopupProps.menu(
+              fit: FlexFit.loose,
               showSelectedItems: true,
               itemBuilder: (context, item, isDisabled, isSelected) => 
                 ListTile(
