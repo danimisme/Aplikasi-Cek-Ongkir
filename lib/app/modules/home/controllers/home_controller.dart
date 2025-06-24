@@ -7,6 +7,7 @@ import 'package:ongkir/app/routes/app_pages.dart';
 
 class HomeController extends GetxController {
   TextEditingController beratC = TextEditingController();
+  RxBool isLoading = false.obs;
 
   Future<List<Province>> fetchProvince(String filter) async {
     try {
@@ -48,6 +49,7 @@ class HomeController extends GetxController {
   }
  
   void cekOngkir() async {
+    isLoading.value = true;
     if (provAsalId.value != "0" && cityAsalId.value != "0" && provTujuanId.value != "0" && cityTujuanId.value != "0" && codeKurir.value != "" && beratC.text.isNotEmpty) {
       try {
         var response = await Dio().post("https://api.rajaongkir.com/starter/cost",
@@ -61,10 +63,11 @@ class HomeController extends GetxController {
             "courier": codeKurir.value,
           }
         );
-        var rajaongkir = response.data['rajaongkir'];
-        print(rajaongkir);
+        isLoading.value = false;
+        var rajaongkir = response.data['rajaongkir']; 
         Get.toNamed(Routes.RESULT, arguments: rajaongkir);
       } catch (e) {
+        isLoading.value = false;
         print("Error: $e");
       }
       
