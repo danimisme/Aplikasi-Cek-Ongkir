@@ -39,4 +39,7 @@ class City {
     if (data == null || data.length == 0) return [];
     return data.map((e) => City.fromJson(e)).toList();
   }
+
+  @override
+  String toString() => cityName!;
 }
