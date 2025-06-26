@@ -12,8 +12,10 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cek Ongkir'),
-        centerTitle: true,
+        title: const Text('Cek Ongkir', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: Color.fromARGB(255, 252, 96, 103),
+        leading: Icon(Icons.local_shipping, color: Colors.white),
+        centerTitle: false,
       ),
       body: ListView(
         padding: EdgeInsets.all(20),
@@ -45,33 +47,34 @@ class HomeView extends GetView<HomeController> {
                 controller.provAsalId.value = value?.provinceId ?? "0",
           ),
           SizedBox(height: 20),
-          DropdownSearch<City>(
-            compareFn: (item1, item2) => item1 == item2,
-            items: (f, s) =>
-                controller.fetchCity(f, controller.provAsalId.value),
-            itemAsString: (item) => item.cityName ?? '',
-            popupProps: PopupProps.menu(
-              fit: FlexFit.loose,
-              showSelectedItems: true,
-              showSearchBox: true,
-              loadingBuilder: (context, searchEntry) =>
-                  const Center(child: CircularProgressIndicator()),
-              itemBuilder: (context, item, isDisabled, isSelected) {
-                return ListTile(
-                  title: Text("${item.type} ${item.cityName}"),
-                );
-              },
-            ),
-            decoratorProps: DropDownDecoratorProps(
-                decoration: InputDecoration(
-              labelText: "Kota Asal",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            )),
-            onChanged: (value) =>
-                controller.cityAsalId.value = value?.cityId ?? "0",
-          ),
+          Obx(() => DropdownSearch<City>(
+                enabled: controller.provAsalId.value != "0",
+                compareFn: (item1, item2) => item1 == item2,
+                items: (f, s) =>
+                    controller.fetchCity(f, controller.provAsalId.value),
+                itemAsString: (item) => item.cityName ?? '',
+                popupProps: PopupProps.menu(
+                  fit: FlexFit.loose,
+                  showSelectedItems: true,
+                  showSearchBox: true,
+                  loadingBuilder: (context, searchEntry) =>
+                      const Center(child: CircularProgressIndicator()),
+                  itemBuilder: (context, item, isDisabled, isSelected) {
+                    return ListTile(
+                      title: Text("${item.type} ${item.cityName}"),
+                    );
+                  },
+                ),
+                decoratorProps: DropDownDecoratorProps(
+                    decoration: InputDecoration(
+                  labelText: "Kota Asal",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                )),
+                onChanged: (value) =>
+                    controller.cityAsalId.value = value?.cityId ?? "0",
+              )),
           SizedBox(height: 20),
           DropdownSearch<Province>(
             compareFn: (item1, item2) => item1 == item2,
@@ -100,33 +103,34 @@ class HomeView extends GetView<HomeController> {
                 controller.provTujuanId.value = value?.provinceId ?? "0",
           ),
           SizedBox(height: 20),
-          DropdownSearch<City>(
-            compareFn: (item1, item2) => item1 == item2,
-            items: (f, s) =>
-                controller.fetchCity(f, controller.provTujuanId.value),
-            itemAsString: (item) => item.cityName ?? '',
-            popupProps: PopupProps.menu(
-              fit: FlexFit.loose,
-              showSelectedItems: true,
-              showSearchBox: true,
-              loadingBuilder: (context, searchEntry) =>
-                  const Center(child: CircularProgressIndicator()),
-              itemBuilder: (context, item, isDisabled, isSelected) {
-                return ListTile(
-                  title: Text("${item.type} ${item.cityName}"),
-                );
-              },
-            ),
-            decoratorProps: DropDownDecoratorProps(
-                decoration: InputDecoration(
-              labelText: "Kota Tujuan",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            )),
-            onChanged: (value) =>
-                controller.cityTujuanId.value = value?.cityId ?? "0",
-          ),
+          Obx(() => DropdownSearch<City>(
+                enabled: controller.provTujuanId.value != "0",
+                compareFn: (item1, item2) => item1 == item2,
+                items: (f, s) =>
+                    controller.fetchCity(f, controller.provTujuanId.value),
+                itemAsString: (item) => item.cityName ?? '',
+                popupProps: PopupProps.menu(
+                  fit: FlexFit.loose,
+                  showSelectedItems: true,
+                  showSearchBox: true,
+                  loadingBuilder: (context, searchEntry) =>
+                      const Center(child: CircularProgressIndicator()),
+                  itemBuilder: (context, item, isDisabled, isSelected) {
+                    return ListTile(
+                      title: Text("${item.type} ${item.cityName}"),
+                    );
+                  },
+                ),
+                decoratorProps: DropDownDecoratorProps(
+                    decoration: InputDecoration(
+                  labelText: "Kota Tujuan",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                )),
+                onChanged: (value) =>
+                    controller.cityTujuanId.value = value?.cityId ?? "0",
+              )),
           SizedBox(height: 20),
           TextField(
             controller: controller.beratC,
@@ -191,7 +195,7 @@ class HomeView extends GetView<HomeController> {
             ),
             // child: Text("Cek Ongkir", style: TextStyle(fontSize: 16, color: Colors.white )),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: Color.fromARGB(255, 252, 96, 103),
               padding: EdgeInsets.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),

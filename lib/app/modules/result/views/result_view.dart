@@ -10,7 +10,10 @@ class ResultView extends GetView<ResultController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ongkos Kirim'),
+        foregroundColor: Colors.white,
+        title: const Text('Ongkos Kirim',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: Color.fromARGB(255, 252, 96, 103),
         centerTitle: true,
       ),
       body: ListView(
