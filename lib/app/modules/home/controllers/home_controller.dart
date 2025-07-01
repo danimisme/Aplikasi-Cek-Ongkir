@@ -4,17 +4,21 @@ import 'package:get/get.dart';
 import 'package:ongkir/app/data/models/city_model.dart';
 import 'package:ongkir/app/data/models/province_model.dart';
 import 'package:ongkir/app/routes/app_pages.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HomeController extends GetxController {
   TextEditingController beratC = TextEditingController();
   RxBool isLoading = false.obs;
+  final String baseUrl = dotenv.env['BASE_URL'] ?? '';
+  final String apiKey = dotenv.env['API_KEY'] ?? '';
 
   Future<List<Province>> fetchProvince(String filter) async {
+    print("Base URL: $baseUrl");
     try {
       var response =
-          await Dio().get('https://api.rajaongkir.com/starter/province',
+          await Dio().get('$baseUrl/province',
               options: Options(headers: {
-                'key': '0ae702200724a396a933fa0ca4171a7e',
+                'key': '$apiKey',
               }));
       print("Response: ${response.data}");
       return Province.fromJsonList(response.data['rajaongkir']['results']);
@@ -32,9 +36,9 @@ class HomeController extends GetxController {
   Future<List<City>> fetchCity(String filter, String provId) async {
     try {
       var response =
-          await Dio().get('https://api.rajaongkir.com/starter/city?province=$provId',
+          await Dio().get('$baseUrl/city?province=$provId',
               options: Options(headers: {
-                'key': '0ae702200724a396a933fa0ca4171a7e',
+                'key': '$apiKey',
               }));
       return City.fromJsonList(response.data['rajaongkir']['results']);
     } on DioException catch (e) {
@@ -52,9 +56,9 @@ class HomeController extends GetxController {
     isLoading.value = true;
     if (provAsalId.value != "0" && cityAsalId.value != "0" && provTujuanId.value != "0" && cityTujuanId.value != "0" && codeKurir.value != "" && beratC.text.isNotEmpty) {
       try {
-        var response = await Dio().post("https://api.rajaongkir.com/starter/cost",
+        var response = await Dio().post("$baseUrl/cost",
           options: Options(headers: {
-            'key': '0ae702200724a396a933fa0ca4171a7e',
+            'key': '$apiKey',
           }),
           data: {
             "origin": int.parse(cityAsalId.value),
